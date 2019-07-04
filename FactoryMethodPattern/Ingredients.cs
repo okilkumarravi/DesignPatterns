@@ -9,7 +9,10 @@ namespace FactoryMethod
     /// <summary>
     /// Product
     /// </summary>
-    abstract class Ingredient { }
+    abstract class Ingredient {
+
+
+    }
 
     /// <summary>
     /// Concrete Product
