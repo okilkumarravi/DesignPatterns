@@ -10,7 +10,7 @@ namespace FactoryMethod
     /// Product
     /// </summary>
     abstract class Ingredient {
-
+       // abstract protected void Cheese();
 
     }
 
