@@ -10,7 +10,10 @@ namespace FactoryMethod
     {
         static void Main(string[] args)
         {
-         
+            Console.Write(CarFactory.BuildCar(CarType.luxry));
+            Console.Write(CarFactory.BuildCar(CarType.Micro));
+            Console.Write(CarFactory.BuildCar(CarType.mini));
+            Console.ReadKey();
         }
     }
 }

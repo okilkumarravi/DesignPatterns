@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+enum CarType
+{
+    Micro, mini, luxry
+}
+enum Location
+{
+    other, India, USA
+}
 namespace FactoryMethod
 {
-    enum CarType
-    {
-        Micro, mini, luxry
-    }
-    enum Location
-    {
-        other, India, USA
-    }
+  
     abstract class Car {
         
         
@@ -43,7 +43,7 @@ namespace FactoryMethod
         }
         public override string ToString()
         {
-            return "CarModel -" + Type;
+            return "\n CarModel -" + Type;
         }
         
     }
@@ -56,7 +56,7 @@ namespace FactoryMethod
 
         private void construct()
         {
-            Console.WriteLine("Luxry Car Generated");
+            Console.WriteLine(" \nLuxry Car Generated\n");
         }
     }
 
@@ -69,25 +69,111 @@ namespace FactoryMethod
 
         private void construct()
         {
-            Console.WriteLine("Mini Car Generated");
+            Console.WriteLine(" \nMini Car Generated\n");
         }
     }
 
     class MicroCar : Car
     {
+       
+
         public MicroCar(Location location) : base(CarType.Micro, location)
         {
             construct();
         }
-
         private void construct()
         {
-            Console.WriteLine("Micro Car Generated");
+            Console.WriteLine("\n Micro Car Generated\n");
         }
     }
-    class IndiaCarfactory
+    class IndiaCarFactory
     {
+         public static Car Builder(CarType type)
+        {
+            Car car = null;
+            switch (type)
+            {
+                case CarType.Micro:
+                    car = new MicroCar(Location.India);
+                    break;
+                case CarType.mini:
+                    car = new MiniCar(Location.India);
+                    break;
+                case CarType.luxry:
+                    car = new LuxryCar(Location.India);
+                    break;
+            }
+            return car;
+        }
 
+    }
+    class USACarFactory
+    {
+        public static Car Builder(CarType type)
+        {
+            Car car = null;
+            switch (type)
+            {
+                case CarType.Micro:
+                    car = new MicroCar(Location.USA);
+                    break;
+                case CarType.mini:
+                    car = new MiniCar(Location.USA);
+                    break;
+                case CarType.luxry:
+                    car = new LuxryCar(Location.USA);
+                    break;
+            }
+            return car;
+        }
+
+    }
+    class OtherCarFactory
+    {
+        public static Car Builder(CarType type)
+        {
+            Car car = null;
+            switch (type)
+            {
+                case CarType.Micro:
+                    car = new MicroCar(Location.other);
+                    break;
+                case CarType.mini:
+                    car = new MiniCar(Location.other);
+                    break;
+                case CarType.luxry:
+                    car = new LuxryCar(Location.other);
+                    break;
+            }
+            return car;
+        }
+
+    }
+
+    class CarFactory
+    {
+        private CarFactory()
+        {
+
+        }
+        public static Car BuildCar(CarType type)
+        {
+            Car car = null;
+            Location location = Location.India;
+            switch (location)
+            {
+                case Location.India:
+                    car = IndiaCarFactory.Builder(type);
+                    break;
+                case Location.other:
+                    car = OtherCarFactory.Builder(type);
+                    break;
+                case Location.USA:
+                    car = USACarFactory.Builder(type);
+                    break;
+            }
+            return car;
+        }
 
     }
 
